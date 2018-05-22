@@ -11,7 +11,7 @@ defmodule Foretoken do
   and, if available, `tokens_to_take` tokens are removed from the bucket.
   When there are no enough tokens in the bucket this function returns `{:error, milliseconds_to_wait}`,
   where `milliseconds_to_wait` is the duration after which the requested tokens become available.
-  Note that waiting for `milliseconds_to_wait` doesn't guarantee success at the next `take/5`;
+  Note that waiting for `milliseconds_to_wait` doesn't guarantee success at the next `take/4`;
   another concurrent process may precede the current process.
 
   Although you can use basically arbitrary term for `bucket` argument,
