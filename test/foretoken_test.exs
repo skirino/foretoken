@@ -15,6 +15,11 @@ defmodule ForetokenTest do
     {:error, _} = take("b1")
   end
 
+  test "take/4 should accept tuples and lists" do
+    assert take({:a, :b})   == :ok
+    assert take(["a", "b"]) == :ok
+  end
+
   test "take/4 should raise if `tokens_to_take` is too large" do
     assert      Foretoken.take("b2", 100, 5, 5) == :ok
     catch_error Foretoken.take("b2", 100, 5, 6)

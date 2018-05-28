@@ -35,7 +35,7 @@ defmodule Foretoken.Ets do
       {
         {bucket, :"$1", :"$2"},
         [{:>=, current_tokens_capped, tokens_to_take}],
-        [{{bucket, {:-, current_tokens_capped, tokens_to_take}, now}}],
+        [{{{:const, bucket}, {:-, current_tokens_capped, tokens_to_take}, now}}],
       },
     ]
   end
