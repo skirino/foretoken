@@ -15,7 +15,7 @@ defmodule Foretoken.InactiveBucketCleaner do
 
   @impl true
   def handle_info(:timeout, state) do
-    threshold = System.monotonic_time(:milliseconds) - Config.inactive_threshold()
+    threshold = System.monotonic_time(:millisecond) - Config.inactive_threshold()
     Ets.delete_all_stale(threshold)
     {:noreply, state}
   end

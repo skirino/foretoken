@@ -9,7 +9,7 @@ defmodule Foretoken.Ets do
   end
 
   def take(bucket, tokens_to_take, millis_per_token, max_tokens) do
-    now = System.monotonic_time(:milliseconds)
+    now = System.monotonic_time(:millisecond)
     ms = match_spec(bucket, tokens_to_take, millis_per_token, max_tokens, now)
     case :ets.select_replace(@table, ms) do
       1 -> :ok
