@@ -6,8 +6,8 @@ defmodule Foretoken.MixProject do
   def project() do
     [
       app:               :foretoken,
-      version:           "0.1.2",
-      elixir:            "~> 1.5",
+      version:           "0.2.0",
+      elixir:            "~> 1.6",
       build_embedded:    Mix.env() == :prod,
       start_permanent:   Mix.env() == :prod,
       deps:              deps(),
@@ -16,7 +16,7 @@ defmodule Foretoken.MixProject do
       source_url:        @github_url,
       homepage_url:      @github_url,
       test_coverage:     [tool: ExCoveralls],
-      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
+      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
     ]
   end
 
@@ -29,9 +29,9 @@ defmodule Foretoken.MixProject do
   defp deps() do
     [
       {:croma      , "~> 0.9"},
-      {:dialyze    , "~> 0.2" , [only: :dev]},
-      {:ex_doc     , "~> 0.14", [only: :dev]},
-      {:excoveralls, "~> 0.8" , [only: :test]},
+      {:dialyxir   , "~> 0.5"   , [only: :dev]},
+      {:ex_doc     , "~> 0.18.0", [only: :dev]},
+      {:excoveralls, "~> 0.9"   , [only: :test]},
     ]
   end
 
