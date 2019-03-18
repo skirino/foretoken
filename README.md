@@ -11,11 +11,11 @@ An ETS-based implementation of the [token bucket algorithm](https://en.wikipedia
 
 ## Feature & Design
 
-- ETS as bucket storage
-- Direct access to ETS table to exploit concurrency
-- On-demand creation of buckets
-- Automatic cleanup of unused buckets
-- Extremely simple API (only 1 public interface function): `Foretoken.take/4`.
+- Simplest possible API (only 1 public interface function: `Foretoken.take/5`)
+- ETS as concurrently accessible bucket storage
+- Bucket lifecycle management
+    - On-demand creation of buckets (whch can be disabled)
+    - Automatic cleanup of unused buckets
 
 ## Compatibility notes
 
