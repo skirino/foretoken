@@ -10,9 +10,9 @@ defmodule Foretoken.Config do
   - `:inactive_threshold`:
     Threshold duration (in milliseconds) to judge whether each bucket can be removed or not.
     Buckets that haven't been used within this duration are regarded as removable.
-    In order to avoid losing the status of a bucket by removal,
+    In order to avoid losing status of a bucket by removal,
     this duration should be longer than `max_tokens * milliseconds_per_token`.
-    Note that `Foretoken.take/4` creates a bucket on-demand if it doesn't exist.
+    Note that `Foretoken.take/5` by default creates a bucket on-demand if it doesn't exist.
     Defaults to `#{@default_inactive_threshold}`.
   - `:bucket_cleanup_interval`:
     Time interval (in milliseconds) between periodic cleanup of inactive buckets.

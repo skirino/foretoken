@@ -8,7 +8,7 @@ defmodule Foretoken.Ets do
     :ok
   end
 
-  def take(bucket, tokens_to_take, millis_per_token, max_tokens) do
+  def take(bucket, tokens_to_take, millis_per_token, max_tokens, create_nonexisting_bucket?) do
     now = System.monotonic_time(:millisecond)
     ms = match_spec(bucket, tokens_to_take, millis_per_token, max_tokens, now)
     case :ets.select_replace(@table, ms) do
@@ -18,12 +18,14 @@ defmodule Foretoken.Ets do
           [{_bucket, tokens, updated_at}] ->
             dur_float = (tokens_to_take - tokens) * millis_per_token - (now - updated_at)
             dur_int   = max(trunc(Float.ceil(dur_float)), 1)
-            {:error, dur_int}
-          [] ->
+            {:error, {:not_enough_token, dur_int}}
+          [] when create_nonexisting_bucket? ->
             case :ets.insert_new(@table, {bucket, 1.0 * (max_tokens - tokens_to_take), now}) do
               true  -> :ok
-              false -> take(bucket, tokens_to_take, millis_per_token, max_tokens) # failed to insert due to concurrent insert, retry
+              false -> take(bucket, tokens_to_take, millis_per_token, max_tokens, create_nonexisting_bucket?) # failed to insert due to concurrent insert, retry
             end
+          [] ->
+            {:error, :nonexisting_bucket}
         end
     end
   end

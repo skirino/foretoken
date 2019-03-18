@@ -5,24 +5,28 @@ defmodule ForetokenTest do
     Foretoken.take(b, 100, 5)
   end
 
-  test "take/4" do
+  test "take/5" do
     Enum.each(1..5, fn _ ->
       assert take("b1") == :ok
     end)
-    {:error, dur} = take("b1")
+    {:error, {:not_enough_token, dur}} = take("b1")
     :timer.sleep(dur)
     assert take("b1") == :ok
-    {:error, _} = take("b1")
+    {:error, {:not_enough_token, _}} = take("b1")
   end
 
-  test "take/4 should accept tuples and lists" do
+  test "take/5 should accept tuples and lists" do
     assert take({:a, :b})   == :ok
     assert take(["a", "b"]) == :ok
   end
 
-  test "take/4 should raise if `tokens_to_take` is too large" do
+  test "take/5 should raise if `tokens_to_take` is too large" do
     assert      Foretoken.take("b2", 100, 5, 5) == :ok
     catch_error Foretoken.take("b2", 100, 5, 6)
+  end
+
+  test "take/5 should return error when nonexisting bucket is specified and told not to create bucket" do
+    assert Foretoken.take("b3", 100, 5, 1, false) == {:error, :nonexisting_bucket}
   end
 
   defp with_short_inactive_threshold(f) do
