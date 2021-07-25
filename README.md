@@ -6,7 +6,7 @@ An ETS-based implementation of the [token bucket algorithm](https://en.wikipedia
 - [Hex package information](https://hex.pm/packages/foretoken)
 
 [![Hex.pm](http://img.shields.io/hexpm/v/foretoken.svg)](https://hex.pm/packages/foretoken)
-[![Build Status](https://travis-ci.org/skirino/foretoken.svg)](https://travis-ci.org/skirino/foretoken)
+[![Build Status](https://travis-ci.com/skirino/foretoken.svg)](https://travis-ci.com/github/skirino/foretoken)
 [![Coverage Status](https://coveralls.io/repos/github/skirino/foretoken/badge.svg?branch=master)](https://coveralls.io/github/skirino/foretoken?branch=master)
 
 ## Feature & Design
